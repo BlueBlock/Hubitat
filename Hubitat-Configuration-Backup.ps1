@@ -1,6 +1,6 @@
 # Name: Hubitat-Configuration-Backup.ps1
 # Purpose: To backup latest hubitat configuration to off-device location
-# Version: 1.0.1
+# Version: 1.0.2
 
 # ex: .\Hubitat-Configuration-Backup.ps1 -HubHostname 192.168.1.99 -BackupDestination c:\temp -WhatIf
 # ex: .\Hubitat-Configuration-Backup.ps1 -HubHostname 192.168.1.99 -BackupDestination c:\temp
@@ -33,7 +33,7 @@ $location = ($WebResponseObj.Forms | Where {$_.Action -eq "/location/update"}).F
 
 # hub software version
 $WebResponseObj = Invoke-WebRequest -Uri "$urlhub/hub/edit"
-$version = $WebResponseObj.ParsedHtml.IHTMLDocument3_getElementByID("hubPopup").getElementsByClassName("menu-text")[0].outerText.Trim()
+$version = $WebResponseObj.ParsedHtml.getElementByID("hubPopup").getElementsByClassName("menu-text")[0].outerText.Trim()
 
 # get and save backup file
 $url = "$($urlhub)/hub/backupDB?fileName=latest"
